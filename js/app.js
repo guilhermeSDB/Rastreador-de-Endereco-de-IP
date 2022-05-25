@@ -1,18 +1,19 @@
-var $elementoIpAdress = $("#ip-adress .info")
-var $elementoLocation = $("#location .info")
-var $elementoTimezone = $("#timezone .info")
-var $elementoISP = $("#isp .info")
+var $elementoIpAdress = $("#ip-adress .info");
+var $elementoLocation = $("#location .info");
+var $elementoTimezone = $("#timezone .info");
+var $elementoISP = $("#isp .info");
+var $inputSearch = $("#InputSearch");
+var $btnSearch = $("#btnSearch");
 var lat;
 var long;
-var map
-var marker
-var $inputSearch = $("#InputSearch")
-var $btnSearch = $("#btnSearch")
+var map;
+var marker;
 var api_key = "at_xkPDmv14KVUhYzHV6AOAjqTT0Yd55";
 
 $(function () {
     InicializarMapa()
     InicializarBtnSearch()
+    InicializarMessageError()
 });
 
 function InicializarMapa(){
@@ -42,6 +43,12 @@ function InicializarMapa(){
         fillOpacity: 0.5,
         radius: 500
     }).addTo(map);
+}
+
+function InicializarMessageError(){
+    $inputSearch.on("click",function (){
+        $(".error-msg").remove()
+    })
 }
    
 function InicializarBtnSearch(){
@@ -89,8 +96,14 @@ function BuscarDados(ip){
         success: function(data) {
             RemoverSkeleton()
             Resultado(data)
-            console.log(data)
             LoadMap(data.location.lat, data.location.lng)
+        },
+        error: function(errors){
+            $(".info").html("Não Encontrado")
+            let messageErro = errors.responseJSON.messages
+            let nodeErrorMsg = $(`<div class="error-msg" style="position: absolute;bottom: -2rem;font-size: 1rem;left: 0;font-weight: 400;color: #ff003b;">${messageErro}</div>`)
+            $(".box-search").append(nodeErrorMsg)
+            RemoverSkeleton()
         },
         timeout: 86000 // sets timeout to 86 seconds
     });
