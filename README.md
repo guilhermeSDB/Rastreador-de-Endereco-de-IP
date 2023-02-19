@@ -6,7 +6,7 @@ Veja no mapa o local e outras informações com base no Endereço de IP.
   <img style="border-radius:10%" width="100%" height="100%" src="images/capa.png" alt="exemplo imagem">
 </p>
 
-> Desafio Frontendmentor Conselhos - Rastreador de Endereço de IP.
+> Desafio Frontendmentor Rastreador - Rastreador de Endereço de IP.
 
 ### [Ver Preview](https://guilhermesdb.github.io/Rastreador-de-Endereco-de-IP/)
 
